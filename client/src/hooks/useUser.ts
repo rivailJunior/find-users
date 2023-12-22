@@ -9,7 +9,7 @@ export const useUser = () => {
     try {
       const { data } = await http.get("http://localhost:3000/users");
       setUser(data);
-      logger.logMessage("Users fetched");
+      logger.trackEvent("Users fetched", { total: data.length });
     } catch (error) {
       logger.logMessage("Unable to fetch users");
     }

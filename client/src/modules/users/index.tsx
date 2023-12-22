@@ -5,7 +5,7 @@ export default function Users() {
   const { user, getUser } = useUser();
   useEffect(() => {
     getUser();
-  }, [getUser]);
+  }, []);
 
   return (
     <div>

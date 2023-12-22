@@ -5,6 +5,9 @@ class LogService {
   logMessage(message: string): void {
     this.logger.logMessage(message);
   }
+  trackEvent(message: string, options?: any): void {
+    this.logger.trackEvent(message, options);
+  }
 }
 
 export { LogService };

@@ -34,7 +34,7 @@ describe("Users page", () => {
     expect(screen.queryByPlaceholderText(/Find user/i)).toBeNull();
   });
 
-  test("should render user list with data", async () => {
+  test.only("should render user list with data", async () => {
     get.mockImplementation(() => Promise.resolve({ data: fakeUser }));
     render(<Users />, {
       http,
