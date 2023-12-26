@@ -1,12 +1,12 @@
 import "./App.css";
-import { HttpProvider } from "./context/httpProvider";
+import { UserProvider } from "./context/userProvider";
 import Users from "./modules/users";
 
 function App() {
   return (
-    <HttpProvider>
+    <UserProvider>
       <Users />
-    </HttpProvider>
+    </UserProvider>
   );
 }
 

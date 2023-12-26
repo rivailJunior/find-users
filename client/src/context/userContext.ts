@@ -4,7 +4,7 @@ import { AxiosAdapter } from "../adapters/axiosAdapter";
 import { Https } from "../interface/http";
 import { Logger } from "../interface/logger";
 import { LogService } from "../service/logService";
-import { LogRocketAdapter } from "../adapters/logrocketAdapter";
+import { LogRocketAdapter } from "../adapters/logRocketAdapter";
 
 export const httpServiceValue = new HttpService(new AxiosAdapter());
 export const logServiceValue = new LogService(new LogRocketAdapter());
@@ -19,4 +19,4 @@ export const contextValue: ContextValue = {
   logger: logServiceValue,
 };
 
-export const HttpContext = createContext(contextValue);
+export const UserContext = createContext(contextValue);

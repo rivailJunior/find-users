@@ -1,8 +1,14 @@
-import { useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect } from "react";
 import { useUser } from "../../hooks/useUser";
+import { userDAO } from "../../entities/userDAO";
+import { UserContext } from "../../context/userContext";
 
 export default function Users() {
-  const { user, getUser } = useUser();
+  const { http, logger } = useContext(UserContext);
+  const { user, getUser } = useUser(
+    new userDAO(http, logger, "http://localhost:3000")
+  );
   useEffect(() => {
     getUser();
   }, []);

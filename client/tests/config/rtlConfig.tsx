@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { render } from "@testing-library/react";
-import { ContextValue, HttpContext } from "../../src/context/httpContext";
+import { ContextValue, UserContext } from "../../src/context/userContext";
 
 const renderWithProvider = (ui: React.ReactElement, options: ContextValue) => {
   return render(
-    <HttpContext.Provider value={options}>{ui}</HttpContext.Provider>
+    <UserContext.Provider value={options}>{ui}</UserContext.Provider>
   );
 };
 

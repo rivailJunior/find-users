@@ -1,18 +1,12 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { IUser } from "../entities/user";
-import { HttpContext } from "../context/httpContext";
+import { IuserDao } from "../entities/userDAO";
 
-export const useUser = () => {
-  const { http, logger } = useContext(HttpContext);
+export const useUser = (userDAO: IuserDao) => {
   const [user, setUser] = useState<IUser[]>();
   async function getUser() {
-    try {
-      const { data } = await http.get("http://localhost:3000/users");
-      setUser(data);
-      logger.trackEvent("Users fetched", { total: data.length });
-    } catch (error) {
-      logger.logMessage("Unable to fetch users");
-    }
+    const data = await userDAO.getUser();
+    setUser(data);
   }
 
   return {
