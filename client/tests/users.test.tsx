@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
+import { afterEach, describe, expect, test, vi } from "vitest";
 import Users from "../src/modules/users";
 import { render } from "../tests/config/rtlConfig";
 import { fakeUser } from "./data/fakeUser";
