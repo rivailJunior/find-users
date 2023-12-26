@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import Users from "../src/modules/users";
 import { render } from "../tests/config/rtlConfig";
 import { fakeUser } from "./data/fakeUser";
@@ -19,11 +19,22 @@ const logger: Logger = {
   trackEvent,
 };
 
-beforeEach(() => {
+afterEach(() => {
   vi.clearAllMocks();
 });
 
 describe("Users page", () => {
+  test("should render user list with error", async () => {
+    get.mockRejectedValueOnce(() => Promise.reject("Error"));
+    render(<Users />, {
+      http,
+      logger,
+    });
+    expect(get).toHaveBeenCalledWith("http://localhost:3000/users");
+    expect(screen.getByText(/Loading.../i)).toBeDefined();
+    await expect(screen.queryByRole("listitem")).toBeNull();
+  });
+
   test("should render user list without data", async () => {
     get.mockImplementationOnce(() => Promise.resolve([])),
       render(<Users />, {
@@ -49,15 +60,5 @@ describe("Users page", () => {
     expect(get).toHaveBeenCalledWith("http://localhost:3000/users");
     expect(screen.getByText(/Search/i)).toBeDefined();
     expect(screen.getByPlaceholderText(/Find user/i)).toBeDefined();
-    // expect(logMessage).toHaveBeenCalledWith("Users fetched");
-  });
-
-  test.skip("should render user list with error", async () => {
-    const { container } = render(<Users />, {
-      http,
-      logger,
-    });
-
-    expect(container).toThrow();
   });
 });
